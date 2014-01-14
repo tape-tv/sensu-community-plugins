@@ -3,6 +3,7 @@
 require 'rubygems' if RUBY_VERSION < '1.9.0'
 require 'sensu-plugin/metric/cli'
 require 'socket'
+require 'filesize'
 
 class MemoryGraphite < Sensu::Plugin::Metric::CLI::Graphite
 
@@ -31,7 +32,7 @@ class MemoryGraphite < Sensu::Plugin::Metric::CLI::Graphite
     mem['freeWOBuffersCaches'] = mem['free'] + (mem['buffers'] + mem['cached'])
 
     mem.each do |k, v|
-      output "#{config[:scheme]}.#{k}", v
+      output "#{config[:scheme]}.#{k}", Filesize.from("#{v} B").to_f('MB')  
     end
 
     ok
