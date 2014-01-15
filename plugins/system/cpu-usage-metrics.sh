@@ -106,4 +106,4 @@ else
 
 fi
 
-echo "$SCHEME.cpu.usage $CPU_USAGE"
+echo "$SCHEME.cpu.usage $CPU_USAGE `date +%s`"
