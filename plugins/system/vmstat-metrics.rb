@@ -22,7 +22,7 @@ class VMStat < Sensu::Plugin::Metric::CLI::Graphite
   option :scheme,
     :description => "Metric naming scheme, text to prepend to .$parent.$child",
     :long => "--scheme SCHEME",
-    :default => "#{Socket.gethostname}.vmstat"
+    :default => "system.#{Socket.gethostname}.vmstat"
 
   def convert_integers(values)
     values.each_with_index do |value, index|
