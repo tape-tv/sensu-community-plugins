@@ -39,28 +39,6 @@ class VMStat < Sensu::Plugin::Metric::CLI::Graphite
     result = convert_integers(`vmstat 1 2|tail -n1`.split(" "))
     timestamp = Time.now.to_i
     metrics = {
-      :procs => {
-         :waiting => result[0],
-         :uninterruptible => result[1]
-       },
-       :memory => {
-         :swap_used => result[2],
-         :free => result[3],
-         :buffers => result[4],
-         :cache => result[5]
-       },
-       :swap => {
-         :in => result[6],
-         :out => result[7]
-       },
-       :io => {
-         :received => result[8],
-         :sent => result[9]
-       },
-       :system => {
-         :interrupts_per_second => result[10],
-         :context_switches_per_second => result[11]
-       },
        :cpu => {
          :user => result[12],
          :system => result[13],
