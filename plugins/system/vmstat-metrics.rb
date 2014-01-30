@@ -44,7 +44,11 @@ class VMStat < Sensu::Plugin::Metric::CLI::Graphite
          :system => result[13],
          :idle => result[14],
          :waiting => result[15]
-      }
+      },
+       :memory => {
+         :swap_used => result[2],
+         :free => result[3],
+       },
     }
     metrics.each do |parent, children|
       children.each do |child, value|
