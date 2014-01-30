@@ -62,7 +62,7 @@ class LoadStat < Sensu::Plugin::Metric::CLI::Graphite
         :load_avg => {
           :one => (result[0].to_f / number_of_cores).round(2),
           :five => (result[1].to_f / number_of_cores).round(2),
-          :fifteen => (result[2].to_f / number_of_cores).round(2)
+          :fif=> (result[2].to_f / number_of_cores).round(2)
         }
       }
     else
@@ -70,7 +70,7 @@ class LoadStat < Sensu::Plugin::Metric::CLI::Graphite
         :load_avg => {
            :one => result[0],
            :five => result[1],
-           :fifteen => result[2]
+           :fif=> result[2]
          }
       }
     end
