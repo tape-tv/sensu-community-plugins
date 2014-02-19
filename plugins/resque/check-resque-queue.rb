@@ -5,6 +5,12 @@ require 'resque/failure/redis'
 
 class Resque_queue_length  < Sensu::Plugin::Check::CLI
 
+  option :hostname,
+    :short => "-h HOSTNAME",
+    :long => "--host HOSTNAME",
+    :description => "Redis hostname",
+    :required => true
+
   option :queue,
     :description => "Queue name",
     :short => '-q QUEUE NAME',
