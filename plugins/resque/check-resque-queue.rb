@@ -28,6 +28,8 @@ class Resque_queue_length < Sensu::Plugin::Check::CLI
     :short => '-w WARNING_THRESHOLD',
     :long => '--warning WARNING_THRESHOLD'
 
+def run
+
 redis = Redis.new(:host => config[:hostname])
 Resque.redis = redis
 
@@ -41,20 +43,19 @@ def warning_length
    config[:warning_threshold].to_i
 end
 
-  sz = Resque.size(config[:queue])
+queue = config[:queue]
+
+  sz = Resque.size(queue)
   if sz >= critical_length
-     crit << "Critical the queue #{v} has currently #{sz}"
+     output "Critical the queue #{queue} has currently #{sz}"
+     critical
      elsif sz >= warning_length
-     warn << "Warning the queue #{v} has currently #{sz}"
+     output "Warning the queue #{queue} has currently #{sz}"
+     warning
      else
-     puts "#{v} OK"
+     puts "#{queue} OK"
+     ok
   end
 
-  def run
-    critical usage_summary unless @crit.empty?
-    warning usage_summary unless @warn.empty?
-    ok "Queue's are fine"
-  end
- end
-
+end
 end
